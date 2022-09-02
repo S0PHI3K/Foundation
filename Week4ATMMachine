@@ -1,0 +1,131 @@
+user_pin = 1234
+account_balance = 100
+withdrawal_amount = 0
+
+
+print('Welcome to CFG BANK')
+
+def user_input(number_of_tries):
+    #1st time input for user
+    enter_pin = int(input("Please insert your pin number: "))
+    try:
+        if enter_pin != user_pin:
+            raise Exception
+        else:
+            print('Your pin number is correct')
+
+
+    except Exception:
+        print('You have inserted an incorrect pin')
+        number_of_tries = number_of_tries - 1
+        print('You have {} number of tries left'.format(number_of_tries))
+
+        # 2nd time input for user
+        try:
+            enter_pin = int(input("Please insert your pin number: "))
+            if enter_pin != user_pin:
+                raise Exception
+            else:
+                print('Your pin number is correct')
+
+        except Exception:
+            print('You have inserted an incorrect pin')
+            number_of_tries = number_of_tries - 1
+            print('You have {} number of tries left'.format(number_of_tries))
+
+            # 3rd time input for user
+            try:
+                enter_pin = int(input("Please insert your pin number: "))
+                if enter_pin != user_pin:
+                    raise Exception
+                else:
+                    print('Your pin number is correct')
+
+            except Exception:
+                print('You have inserted an incorrect pin. You have reached the maximum number of attempts. \nPlease wait for your card to be returned. \nThank you for using CFG Bank')
+                number_of_tries = number_of_tries - 1
+                quit()
+
+
+def withdrawing_money():
+    global withdrawal_amount
+
+    print('\nYour account balance is: £{}'.format(account_balance))
+    query = int(input('\nHow much money would you like to withdraw? \nPlease select from the following options:\n 1. £10 \n 2. £20 \n 3. £30 \n 4. £40 \n '
+                      '5. £50 \n 6. £100 \n 7. £150 \n 8. £200 \n'))
+
+    try:
+        if (query == 1) or (query == 10):
+            withdrawal_amount = (withdrawal_amount + 10)
+        elif (query == 2) or (query == 20):
+            withdrawal_amount = (withdrawal_amount + 20)
+        elif (query == 3) or (query == 30):
+            withdrawal_amount = (withdrawal_amount + 30)
+        elif (query == 4) or (query == 40):
+            withdrawal_amount = (withdrawal_amount + 40)
+        elif (query == 5) or (query == 50):
+            withdrawal_amount = (withdrawal_amount + 50)
+        elif (query == 6) or (query == 100):
+            withdrawal_amount = (withdrawal_amount + 100)
+        elif (query == 7) or (query == 150):
+            withdrawal_amount = (withdrawal_amount + 150)
+        elif (query == 8) or (query == 200):
+            withdrawal_amount = (withdrawal_amount + 200)
+        else:
+            raise Exception
+
+    except Exception:
+            print('You have inputted an incorrect amount. You have one more attempt to insert a correct amount.')
+
+            print('Your account balance is: £{}'.format(account_balance))
+            query = int(input('How much money would you like to withdraw? \nPlease select from the following options:\n 1. £10 \n 2. £20 \n 3. £30 \n 4. £40 \n '
+        '5. £50 \n 6. £100 \n 7. £150 \n 8. £200 \n'))
+
+            if (query == 1) or (query == 10):
+                withdrawal_amount = (withdrawal_amount + 10)
+            elif (query == 2) or (query == 20):
+                withdrawal_amount = (withdrawal_amount + 20)
+            elif (query == 3) or (query == 30):
+                withdrawal_amount = (withdrawal_amount + 30)
+            elif (query == 4) or (query == 40):
+                withdrawal_amount = (withdrawal_amount + 40)
+            elif (query == 5) or (query == 50):
+                withdrawal_amount = (withdrawal_amount + 50)
+            elif (query == 6) or (query == 100):
+                withdrawal_amount = (withdrawal_amount + 100)
+            elif (query == 7) or (query == 150):
+                withdrawal_amount = (withdrawal_amount + 150)
+            elif (query == 8) or (query == 200):
+                withdrawal_amount = (withdrawal_amount + 200)
+            else:
+                print('You have inputted an incorrect amount. \nPlease wait for your card to be returned. \nThank you for using CFG Bank')
+                quit()
+
+
+
+def final_funds():
+
+    error = withdrawal_amount > account_balance
+
+    try:
+        if error:
+            raise Exception
+
+    except Exception:
+        print('You do not have the available funds. \nPlease wait for your card to be returned.')
+
+
+    else:
+        print('Your money is being processed \n')
+        new_balance = (account_balance - withdrawal_amount)
+        print('Your remaining balance is: £{}'.format(new_balance))
+        print('Please wait for your money to be withdrawn and your card to be returned.')
+
+
+    finally:
+        print('\nThank you for using CFG Bank')
+
+
+user_input(3)
+withdrawing_money()
+final_funds()
